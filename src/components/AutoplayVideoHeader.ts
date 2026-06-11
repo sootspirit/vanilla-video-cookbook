@@ -10,25 +10,18 @@ export class AutoplayVideoHeader {
   private btn: HTMLButtonElement | null = null;
   private playIcon: HTMLElement | null = null;
   private pauseIcon: HTMLElement | null = null;
-  
+
   private userPaused = false;
   private observer: IntersectionObserver | null = null;
 
   constructor(options: VideoHeaderOptions) {
-    // 1. Prevent running in editor environment
-    if (this.isEditorEnv()) return;
-
-    // 2. Initialize elements
+    // 1. Initialize elements
     this.initElements(options);
     if (!this.isValid()) return;
 
-    // 3. Start behavior
+    // 2. Start behavior
     this.initEvents();
     this.initObserver();
-  }
-
-  private isEditorEnv(): boolean {
-    return window.location.pathname.includes('editor.html');
   }
 
   private initElements(options: VideoHeaderOptions): void {
@@ -39,7 +32,13 @@ export class AutoplayVideoHeader {
   }
 
   private isValid(): boolean {
-    return !!(this.video && this.video instanceof HTMLVideoElement && this.btn && this.playIcon && this.pauseIcon);
+    return !!(
+      this.video &&
+      this.video instanceof HTMLVideoElement &&
+      this.btn &&
+      this.playIcon &&
+      this.pauseIcon
+    );
   }
 
   private initEvents(): void {
@@ -57,7 +56,7 @@ export class AutoplayVideoHeader {
   // Arrow functions automatically bind 'this', safe for event listeners
   private togglePlayback = (): void => {
     if (!this.video) return;
-    
+
     this.userPaused = !this.video.paused;
     this.userPaused ? this.video.pause() : this.video.play().catch(console.error);
     this.updateUI();
@@ -67,7 +66,7 @@ export class AutoplayVideoHeader {
     if (!this.video) return;
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     entries.forEach((entry) => {
       if (entry.isIntersecting && !this.userPaused && !motionQuery.matches) {
         this.video?.play().catch(console.error);
@@ -80,7 +79,7 @@ export class AutoplayVideoHeader {
 
   private updateUI(): void {
     if (!this.video) return;
-    
+
     this.playIcon?.classList.toggle('hidden', !this.video.paused);
     this.pauseIcon?.classList.toggle('hidden', this.video.paused);
   }
