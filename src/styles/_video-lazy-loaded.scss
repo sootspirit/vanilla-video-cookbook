@@ -1,0 +1,13 @@
+@use './medias';
+
+.lazy-video-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.lazy-video-placeholder,
+.lazy-video {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}

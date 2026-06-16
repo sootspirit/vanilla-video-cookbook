@@ -22,15 +22,9 @@
           src="https://scene7.toyota.eu/is/content/toyotaeurope/intro_RAV4_dekstop?scl=1"
           media="(min-width: 900px)"
         />
-        <source
-          src="https://scene7.toyota.eu/is/content/toyotaeurope/intro_RAV4_mobile?scl=1"
-        />
+        <source src="https://scene7.toyota.eu/is/content/toyotaeurope/intro_RAV4_mobile?scl=1" />
       </video>
-      <button
-        aria-label="Włącz/zatrzymaj"
-        class="video-header__play-pause-btn"
-        id="videoControl"
-      >
+      <button aria-label="Włącz/zatrzymaj" class="video-header__play-pause-btn" id="videoControl">
         <svg
           id="playIcon"
           aria-hidden="true"
@@ -68,12 +62,30 @@
     </section>
     <!-- Lazy Loaded Video -->
     <div class="lazy-video-container">
-      <div class="lazy-video-placeholder"></div>
+      <picture class="lazy-video-placeholder">
+        <source
+          srcset="
+            https://scene7.toyota.eu/is/content/toyotaeurope/TOYMRK-36297_strona_elektryki_v2_2?scl=1
+          "
+        />
+        <source
+          srcset="
+            https://scene7.toyota.eu/is/content/toyotaeurope/TOYMRK-36297_strona_elektryki_v2_2_desktop?scl=1
+          "
+          media="(min-width: 900px)"
+        />
+
+        <img
+          src="https://scene7.toyota.eu/is/content/toyotaeurope/TOYMRK-36297_strona_elektryki_v2_2?scl=1"
+          alt="Zastępczy obraz dla wideo"
+          class="lazy-video-placeholder__image"
+        />
+      </picture>
       <video
         class="lazy-video"
         preload="auto"
         id="closVideo"
-        title="Lazy Loaded Video"
+        title="Lazy Loaded Video Title"
         loading="lazy"
         loop
         muted
@@ -87,6 +99,28 @@
           src="https://scene7.toyota.eu/is/content/toyotaeurope/TOYMRK-36297_strona_elektryki_v2_2?scl=1"
         />
       </video>
+      <div class="clos-battery__video-texts">
+        <h2 class="clos-battery__video-title">Elektryczne serce</h2>
+        <button
+          id="closPlayBtn"
+          class="clos-battery__play-button"
+          aria-label="{{ battery.video.buttonLabel }}"
+        >
+          <svg
+            aria-hidden="true"
+            class="clos-battery__play-button-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100"
+            height="100"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M9.656 7.719l-1.75-1.75q-0.188-0.188-0.438-0.086t-0.25 0.367v3.5q0 0.266 0.25 0.367t0.438-0.086l1.75-1.75q0.109-0.109 0.109-0.281t-0.109-0.281zM9.328 7.953q0.047 0.047 0 0.094l-1.641 1.641q-0.016 0.016-0.039 0.008t-0.023-0.039v-3.313q0-0.031 0.023-0.039t0.039 0.008zM14 8q0-2.484-1.758-4.242t-4.242-1.758-4.242 1.758-1.758 4.242 1.758 4.242 4.242 1.758 4.242-1.758 1.758-4.242zM13.594 8q0 1.516-0.75 2.805t-2.039 2.039-2.805 0.75-2.805-0.75-2.039-2.039-0.75-2.805 0.75-2.805 2.039-2.039 2.805-0.75 2.805 0.75 2.039 2.039 0.75 2.805z"
+              fill="#FFF"
+            ></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

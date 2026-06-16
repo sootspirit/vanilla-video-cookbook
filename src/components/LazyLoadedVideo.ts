@@ -1,14 +1,29 @@
 interface LazyLoadedVideoProps {
   videoSelector: string;
-  placeholderSelector?: string;
+  buttonSelector: string;
+  placeholderDesktopSelector?: string;
+  placeholderMobileSelector?: string;
 }
 
 export class LazyLoadedVideo {
   private video: HTMLVideoElement | null = null;
-  private placeholder: HTMLElement | null = null;
+  private btn: HTMLButtonElement | null = null;
+  private placeholderDesktop: HTMLElement | null = null;
+  private placeholderMobile: HTMLElement | null = null;
   private observer: IntersectionObserver | null = null;
 
   constructor(options: LazyLoadedVideoProps) {}
+
+  private initElements(options: LazyLoadedVideoProps): void {
+    this.video = document.querySelector(options.videoSelector) as HTMLVideoElement;
+    this.btn = document.querySelector(options.buttonSelector) as HTMLButtonElement;
+    if (options.placeholderDesktopSelector) {
+      this.placeholderDesktop = document.querySelector(options.placeholderDesktopSelector);
+    }
+    if (options.placeholderMobileSelector) {
+      this.placeholderMobile = document.querySelector(options.placeholderMobileSelector);
+    }
+  }
 }
 
 function initVideo() {
